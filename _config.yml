@@ -1,0 +1,7 @@
+title: Adam Chen's Blog
+email: progmdong@gmail.com
+
+# Build setting
+markdown: kramdown
+theme: minima
+
