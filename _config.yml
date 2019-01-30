@@ -4,4 +4,6 @@ email: progmdong@gmail.com
 # Build setting
 markdown: kramdown
 theme: minima
-
+description: >- # this means to ignore newlines until "baseurl:"⏎
+    My Tech Blog to Record Computer Graphics Learning
+baseurl: ""
