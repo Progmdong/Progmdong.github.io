@@ -19,7 +19,7 @@ google-analytics:
 
 # Disqus
 disqus:
-  id:               "kiko-plus"
+  id:               ""
 
 # URL
 url:                "https://progmdong.github.io" # the base hostname & protocol for your site
