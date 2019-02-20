@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Skin Rendering"
-description: "Notes of chapter 14.6 \"Subsurface Scattering\" in Real-Time Rendering 4th"
+description: "Summary of current Real-Time Skin Rendering Algorithm"
 date: 2019-02-03
 tags: [skin rendering]
 comments: true
