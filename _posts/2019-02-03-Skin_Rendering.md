@@ -11,7 +11,7 @@ share: true
 
 In some cases, the scale of scattering is relatively small, as for media with a high optical depth, such as human skin. Scattered light is re-emitted from the surface close to its original point of entry. This shift in location means that subsurface scattering cannot be modeled with a BRDF. That is, when the scattering occurs over a distance larger than a pixel, its more global nature is apparent. Special methods must be used to render such effects.
 <center>
-<img src="http://pm7bm4ebj.bkt.clouddn.com/1549424376359.png">
+<img src="http://tech-blog-pics.oss-cn-shenzhen.aliyuncs.com/1549424376359.png?Expires=1551541097&OSSAccessKeyId=TMP.AQHVax7ckcVw0Kg0LNEtcnQfoL6O8y_ZrfusYQHICeH9FpQjeZBkehxXKA-4MC4CFQClpIZO7f60C_eWsvAqBzXC1Yr9UwIVAKmNlIqBSTV1S8GEKCNLy5RxhwXo&Signature=L9jRoxWy61MaOO4Vc8G7hqGZ3sY%3D">
 </center>
 
 For most materials, the reflectance of light is usually separated into two components that are handled independently. [1] surface reflectance, typically  approximated with a simple specular calculation; and [2] subsurface reflectance, which typically approximated with a simple diffuse calculation. However, these two components require more advanced models to generate realistic imagery of skin.
@@ -31,11 +31,11 @@ Pre-Integrated take a different approach to the problem of subsurface scattering
 For each skin curvature and for all angles $\theta$ between $N$ and $L$, we perform the integration:
 <center>$$D(\theta, r)=\frac{\int_{-\pi}^{\pi}cos(\theta+x)\cdot R(2rsin(x/2))dx}{\int_{-\pi}^{\pi}R(2rsin(x/2))dx}$$</center>
 <center>
-<img src="http://pm7bm4ebj.bkt.clouddn.com/1549942443041.png">
+<img src="http://tech-blog-pics.oss-cn-shenzhen.aliyuncs.com/1549942443041.png?Expires=1551541128&OSSAccessKeyId=TMP.AQHVax7ckcVw0Kg0LNEtcnQfoL6O8y_ZrfusYQHICeH9FpQjeZBkehxXKA-4MC4CFQClpIZO7f60C_eWsvAqBzXC1Yr9UwIVAKmNlIqBSTV1S8GEKCNLy5RxhwXo&Signature=nS1w8Mk%2F6ocwiJOe%2BcqoFl5AkMk%3D">
 </center>
 The difference was negligible and the ring integration fits nicely into a shader that is used to compute the lookup texture. The variable $R()$ refers to the diffusion profile, used the sum of Gaussians from the previous section. Rather than performing an expensive $arccos()$ operation in the shader to calculate the angle, the skin shading algorithm push this into the lookup, so the lookup is indexed by $N\cdot L$ directly.
 <center>
-<img src="http://pm7bm4ebj.bkt.clouddn.com/1549943017744.png">
+<img src="http://tech-blog-pics.oss-cn-shenzhen.aliyuncs.com/1549943017744.png?Expires=1551541147&OSSAccessKeyId=TMP.AQHVax7ckcVw0Kg0LNEtcnQfoL6O8y_ZrfusYQHICeH9FpQjeZBkehxXKA-4MC4CFQClpIZO7f60C_eWsvAqBzXC1Yr9UwIVAKmNlIqBSTV1S8GEKCNLy5RxhwXo&Signature=JYJzxJQIensSixanwEOQe23v%2FeQ%3D">
 </center>
 This approximation will work very well on smooth surfaces without fast changes in curvature, but breaks down when curvature changes too quickly. To handle the effect of subsurface scattering on small surface details, Penner modifies the technique by [Ma et al.][2]. Since using four normals would require four transformations into tangent space and four times the memory, an approximation was investigated using only one mipmapped normal map. When using this optimization, they sample the specular normal as usual, but also sample a red normal clamped below a tunable mip-level in another sampler. Transform those two normals into tangent space and blend between them to get green and blue normals.
 Additionally, to get the scattering profile to span through shadow boundaries, the shadow penumbra profile can be used to bias the LUT coordinates. The trick used for shadows is to think of the results of shadow mapping algorithm as a falloff function rather than directly as a penumbra. When the falloff is completely black or white, things are completely occluded or unoccluded, respectively. However, what happens between those two values can be reinterpret. Define the representative shadow penumbra $P()$ as a one-dimensional falloff from filtering a straight shadow edge (a step function) against the shadow mapping blur kernel. For a given shadow value we can find the position within the representative penumbra using the inverse $P^{-1}()$ (assuming monotonically decreasing). In the end, two-dimensional shadow-lookup integration is a simple convolution:
