@@ -8,8 +8,6 @@ comments: true
 share: true
 ---
 
-# Volumetric Rendering
-
 ## Light Scattering Theory
 ### Properties of Volumes
 There are four types of events that can affect the amount of radiance propagating along a ray through a medium.
@@ -41,8 +39,8 @@ where $S^{2}$ denotes the spherical domain around the position $x$. The $\sigma 
 <img src="/assets/images/post04/post04_scattering.jpg" alt="scattering" />
 </center>
 - **Assembling**. Now add up all constituent terms. Due to their fundamental similarity, absorption and out-scattering can be combined into the extinction coefficient $\sigma _{t}(x)$:
-<center>$$(\omega \cdot \triangledown )L(x, \omega)=-\sigma _{t}(x)L(x, \omega) + \sigma _{a}L_{e}(x, \omega ) + \omega _{s}(x)L_{s}(x, \omega )$$</center>
-where $L_{s}(x, \omega) = \int _{S_{2}}f_{p}(x, \omega , \omega ')L(x, \omega ')d\omega '$ for simplification.
+<center>$$(\omega \cdot \triangledown )L(x, \omega)=-\sigma _{t}(x)L(x, \omega) + \sigma _{a}L_{e}(x, \omega ) + \sigma _{s}(x)L_{s}(x, \omega )$$</center>
+where $$L_{s}(x, \omega) = \int _{S^{2}}f_{p}(x, \omega , \omega')L(x, \omega')d\omega'$$ for simplification.
 
 ## The Real-time Volumetric Cloudscapes of Horizon
 Andrew Schneider and Nathan Vos introduce a voxel clouds system in the game Horizon Zero Dawn at SIGGRAPH 2015, as part of the Adavances in Real-time rendering Course.

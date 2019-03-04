@@ -8,11 +8,10 @@ comments: true
 share: true
 ---
 
-# Reading Note: Real-Time Polygonal-Light Shading with Linearly Transformed Cosines
 ## Definition and Properties
 $D_{0}$ denotes the original distribution to be transformed. To generate a new distribution $D_{0}$, a linear transformation represented by a 3x3 matrix $M$ is applied to the direction vector $w_{0}$ of the original distribution $D_{0}$, where we get $w=\frac {Mw_{0}}{\left \|  Mw_{0}\right \|}$. 
 <center>
-<img src="http://tech-blog-pics.oss-cn-shenzhen.aliyuncs.com/1550668362167.png?Expires=1551540866&OSSAccessKeyId=TMP.AQHVax7ckcVw0Kg0LNEtcnQfoL6O8y_ZrfusYQHICeH9FpQjeZBkehxXKA-4MC4CFQClpIZO7f60C_eWsvAqBzXC1Yr9UwIVAKmNlIqBSTV1S8GEKCNLy5RxhwXo&Signature=O%2FyK0Edx%2Fup3tKaK8mluk3daKT4%3D">
+<img src="/assets/images/post03/ltc.png"/>
 </center>
 The magnitude of an LTSD is the magnitude of the original distribution $D_{0}$ in the original direction $w_{0}$ multiplied by the change of solid angle measure due to the distortion of the spherical transformation. It has the closed-form expression:
 <center>
@@ -40,7 +39,7 @@ Define the original distribution $D_{0}$ which is a normalized clamped cosine di
 $$D_{0}(w_{0} = (x, y, z)) = \frac{1}{\pi}max(0, z)$$
 </center>
 <center>
-<img src="http://tech-blog-pics.oss-cn-shenzhen.aliyuncs.com/1550584536812.png?Expires=1551540897&OSSAccessKeyId=TMP.AQHVax7ckcVw0Kg0LNEtcnQfoL6O8y_ZrfusYQHICeH9FpQjeZBkehxXKA-4MC4CFQClpIZO7f60C_eWsvAqBzXC1Yr9UwIVAKmNlIqBSTV1S8GEKCNLy5RxhwXo&Signature=BfmQuZ4mVDT%2FQvcQSUgLzTVKtHs%3D">
+<img src="/assets/images/post03/clamped_cosine.png"/>
 </center>
 Approximate the spherical functions given by the cosine-weighted GGX BRDFs over the light directions $w_{l}$:
 <center>
